@@ -1,4 +1,4 @@
-console.log("loaded the index.js script again.");
+console.log("loaded the index.js script again!!.");
 
 //Example of JSX
 //  jsxSample -> plain HTML can't be rendered diretly into the Browser DOM
