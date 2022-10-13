@@ -7,7 +7,11 @@ console.log("loaded the index.js script again!!.");
 // Comment the jsxSample to see things break
 // Uncomment the transpiledJsx below to see this work
 
-let jsxSample = <p>This is the first JSX!!</p>;
+let jsxSample = (
+  <div>
+    <h1>This is the first JSX!!</h1>
+  </div>
+);
 
 // BABEL - babeljs.io/repl
 //
