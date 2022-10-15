@@ -35,7 +35,115 @@ let jsx3 = (
   </div>
 );
 
+//4. Expressions with conditions
+//
+//   publishedYear field in the object can be optional
+//   if its available, it can be used else a default value used
+
+let myBook = {
+  title: "The History of Civilisation - 1",
+  author: "William Durant",
+  publisher: "Simon & Schuster",
+  edition: 8,
+  publishedYear: 1984,
+};
+
+//Book may have publishedYear as an optional field
+const getSummary = function (book) {
+  let summary = `${book.title} - ${book.author}, published by ${book.publisher}`;
+
+  //Conditional
+  if (book.publishedYear) {
+    summary += ` in ${book.publishedYear}`;
+  } else {
+    summary += " Publication Year is not known";
+  }
+
+  return summary;
+};
+
+let jsx4 = (
+  <div>
+    <h1>My Book Details</h1>
+    <h2>{myBook.title}</h2>
+    <p>
+      <em>{getSummary(myBook)}</em>
+    </p>
+  </div>
+);
+
+//5. Embedded JSX
+//   - The function here now returns a JSX instead of a plain string
+//   - When this returned JSX is embedded within the parent JSX,
+//     the embedded JSX can result in a successful rendering OR if its
+//     of the type "undefined", will not result in any HTML element that
+//     gets inserted
+
+let myBook5 = {
+  title: "The History of Civilisation - 1",
+  author: "William Durant",
+  publisher: "Simon & Schuster",
+  edition: 8,
+  publishedYear: 1984,
+};
+const getSummaryEmbedded = function (book) {
+  let summary = `${book.title} - ${book.author}, published by ${book.publisher}`;
+
+  //Conditional
+  if (book.publishedYear) {
+    summary += ` in ${book.publishedYear}`;
+    return (
+      <p>
+        <em>{summary}</em>
+      </p>
+    );
+  } else {
+    //publsihedYear not available, can't complete the summary
+    return undefined;
+  }
+};
+
+//This is an example of an embedded JSX - see the getSummaryEmbedded() call.
+let jsx5 = (
+  <div>
+    <h1>My Book Details</h1>
+    <h2>{myBook.title}</h2>
+    {/* Embedded JSX */}
+    {/* getSummaryEmbedded() call returns JSX that gets embedded */}
+    {getSummaryEmbedded(myBook5)}
+  </div>
+);
+
+//6: Ternary Operator
+//   If the
+let myBook6 = {
+  title: "The History of Civilisation - 1",
+};
+let jsx6 = (
+  <div>
+    {/* Render the book title with JS ternary operator*/}
+    {<h1>{myBook6.title ? myBook6.title.toUpperCase() : "Title: Unknown"}</h1>}
+  </div>
+);
+
+//7: Logical AND operator to conditionally render the JSX
+//   Inside the book object, check if the publishedYear > 1920
+//   and render the copyright information accordingly
+let myBook7 = {
+  title: "The History of Civilisation - 1",
+  publishedYear: 1934,
+};
+let jsx7 = (
+  <div>
+    {/* Render the book title with AND */}
+    {<h1>{myBook7.title}</h1>}
+    {myBook7.publishedYear && myBook7.publishedYear > 1920 && (
+      <h2>Published in: {myBook7.publishedYear}</h2>
+    )}
+  </div>
+);
+
 const modernAppRoot = ReactDOM.createRoot(document.querySelector("#app"));
 //modernAppRoot.render(jsx); //JSX transpiled into React calls
 //modernAppRoot.render(jsx2); //JSX transpiled into React calls
-modernAppRoot.render(jsx3); //JSX transpiled into React calls
+modernAppRoot.render(jsx7); //JSX transpiled into React calls
