@@ -19,22 +19,39 @@ const onFormSubmit = (e) => {
   //   e.target.elements.input.value
 
   e.preventDefault(); //don't let the browser refresh the page
-  console.log(e); //log the event
+
+  const bookTitle = e.target.elements.booktitle.value;
+  //See if bookTitle is non-null (empty or not specified)
+  if (bookTitle) {
+    app.books.push(bookTitle);
+    e.target.elements.booktitle.value = ""; //clear the book title field
+
+    //Template data has changed, re-render the app
+    renderApp();
+  } else {
+    console.warn("No book title was specified. Ignoring....");
+  }
 };
 
-const jsx = (
-  <div>
-    <h1>{app.title}</h1>
-    <h2>{app.subtitle}</h2>
-    <p>There are {app.books.length} books in the list so far.</p>
-
-    {/* form to allow new book title entry */}
-    <form onSubmit={onFormSubmit}>
-      <input type="text" name="booktitle" placeholder="Book title" />
-      <button type="submit">Enter it!</button>
-    </form>
-  </div>
-);
-
 const appRoot = ReactDOM.createRoot(document.querySelector("#app"));
-appRoot.render(jsx);
+
+const renderApp = () => {
+  const jsx = (
+    <div>
+      <h1>{app.title}</h1>
+      <h2>{app.subtitle}</h2>
+      <p>There are {app.books.length} books in the list so far.</p>
+
+      {/* form to allow new book title entry */}
+      <form onSubmit={onFormSubmit}>
+        <input type="text" name="booktitle" placeholder="Book title" />
+        <button type="submit">Enter it!</button>
+      </form>
+    </div>
+  );
+
+  appRoot.render(jsx);
+};
+
+//Intial App render
+renderApp();

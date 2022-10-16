@@ -21,40 +21,57 @@ var onFormSubmit = function onFormSubmit(e) {
   //   e.target.elements.input.value
 
   e.preventDefault(); //don't let the browser refresh the page
-  console.log(e); //log the event
+
+  var bookTitle = e.target.elements.booktitle.value;
+  //See if bookTitle is non-null (empty or not specified)
+  if (bookTitle) {
+    app.books.push(bookTitle);
+    e.target.elements.booktitle.value = ""; //clear the book title field
+
+    //Template data has changed, re-render the app
+    renderApp();
+  } else {
+    console.warn("No book title was specified. Ignoring....");
+  }
 };
 
-var jsx = React.createElement(
-  "div",
-  null,
-  React.createElement(
-    "h1",
-    null,
-    app.title
-  ),
-  React.createElement(
-    "h2",
-    null,
-    app.subtitle
-  ),
-  React.createElement(
-    "p",
-    null,
-    "There are ",
-    app.books.length,
-    " books in the list so far."
-  ),
-  React.createElement(
-    "form",
-    { onSubmit: onFormSubmit },
-    React.createElement("input", { type: "text", name: "booktitle", placeholder: "Book title" }),
-    React.createElement(
-      "button",
-      { type: "submit" },
-      "Enter it!"
-    )
-  )
-);
-
 var appRoot = ReactDOM.createRoot(document.querySelector("#app"));
-appRoot.render(jsx);
+
+var renderApp = function renderApp() {
+  var jsx = React.createElement(
+    "div",
+    null,
+    React.createElement(
+      "h1",
+      null,
+      app.title
+    ),
+    React.createElement(
+      "h2",
+      null,
+      app.subtitle
+    ),
+    React.createElement(
+      "p",
+      null,
+      "There are ",
+      app.books.length,
+      " books in the list so far."
+    ),
+    React.createElement(
+      "form",
+      { onSubmit: onFormSubmit },
+      React.createElement("input", { type: "text", name: "booktitle", placeholder: "Book title" }),
+      React.createElement(
+        "button",
+        { type: "submit" },
+        "Enter it!"
+      )
+    )
+  );
+
+  appRoot.render(jsx);
+};
+
+//Intial App render
+renderApp();
