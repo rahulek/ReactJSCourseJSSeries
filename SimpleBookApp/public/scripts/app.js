@@ -58,36 +58,17 @@ var renderApp = function renderApp() {
       app.books.length,
       " books in the list so far."
     ),
-    [1, 2, 3],
-    React.createElement("br", null),
-    [98, undefined, true, false, null, 99],
-    React.createElement("br", null),
-    [React.createElement(
-      "p",
+    React.createElement(
+      "ul",
       null,
-      "1"
-    ), React.createElement(
-      "p",
-      null,
-      "2"
-    ), React.createElement(
-      "p",
-      null,
-      "-45"
-    )],
-    [React.createElement(
-      "p",
-      { key: "1" },
-      "1"
-    ), React.createElement(
-      "p",
-      { key: "2" },
-      "2"
-    ), React.createElement(
-      "p",
-      { key: "3" },
-      "-45"
-    )],
+      app.books.map(function (book) {
+        return React.createElement(
+          "li",
+          { key: app.books.indexOf(book) },
+          book
+        );
+      })
+    ),
     React.createElement(
       "form",
       { onSubmit: onFormSubmit },

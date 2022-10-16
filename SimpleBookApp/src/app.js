@@ -42,16 +42,12 @@ const renderApp = () => {
       <h2>{app.subtitle}</h2>
       <p>There are {app.books.length} books in the list so far.</p>
 
-      {/* Array Support 1 */}
-      {[1, 2, 3]}
-      <br />
-      {/* Array Support 2 */}
-      {[98, undefined, true, false, null, 99]}
-      <br />
-      {/* Array Support 3 */}
-      {[<p>1</p>, <p>2</p>, <p>-45</p>]}
-      {/* Array Support 4 */}
-      {[<p key="1">1</p>, <p key="2">2</p>, <p key="3">-45</p>]}
+      {/* Render the book list */}
+      <ul>
+        {app.books.map((book) => (
+          <li key={app.books.indexOf(book)}>{book}</li>
+        ))}
+      </ul>
 
       {/* form to allow new book title entry */}
       <form onSubmit={onFormSubmit}>
