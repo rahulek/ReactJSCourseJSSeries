@@ -75,7 +75,7 @@ var renderApp = function renderApp() {
       React.createElement("input", { type: "text", name: "booktitle", placeholder: "Book title" }),
       React.createElement(
         "button",
-        { type: "submit" },
+        { type: "submit", disabled: app.books.length >= 10 },
         "Enter it!"
       )
     )

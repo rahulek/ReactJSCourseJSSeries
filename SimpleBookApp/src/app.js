@@ -41,18 +41,20 @@ const renderApp = () => {
       <h1>{app.title}</h1>
       <h2>{app.subtitle}</h2>
       <p>There are {app.books.length} books in the list so far.</p>
-
       {/* Render the book list */}
       <ul>
         {app.books.map((book) => (
           <li key={app.books.indexOf(book)}>{book}</li>
         ))}
       </ul>
-
       {/* form to allow new book title entry */}
+      {/* handle the disabling of the "Enter it" button */}
+
       <form onSubmit={onFormSubmit}>
         <input type="text" name="booktitle" placeholder="Book title" />
-        <button type="submit">Enter it!</button>
+        <button type="submit" disabled={app.books.length >= 10}>
+          Enter it!
+        </button>
       </form>
     </div>
   );
