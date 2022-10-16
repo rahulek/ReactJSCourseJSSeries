@@ -4,8 +4,45 @@
 //Store - title, subtitle and empty list of books.
 var app = {
   title: "Simple Book Listing Application",
-  subtitle: "Books are your teachers.",
+  subtitle: "Books are your teachers",
   books: []
+};
+
+//store the styles locally
+var appStyles = {
+  app: {
+    backgroundColor: "#ececec",
+    paddingBottom: "30px"
+  },
+  headerWrapper: {
+    backgroundColor: "#34A4C8",
+    padding: "20px"
+  },
+  h1: {
+    textAlign: "center",
+    color: "#304151"
+  },
+  h2: {
+    textAlign: "center",
+    color: "#304151"
+  },
+  counter: {
+    textAlign: "center",
+    fontSize: "20px",
+    fontStyle: "italic",
+    color: "#F3644E "
+  },
+  booklist: {
+    textAlign: "center",
+    listStyleType: "none"
+  },
+  book: {
+    fontSize: "1.5rem",
+    color: "black"
+  },
+  form: {
+    textAlign: "center"
+  }
 };
 
 //Function to handle the form submission events
@@ -40,38 +77,40 @@ var appRoot = ReactDOM.createRoot(document.querySelector("#app"));
 var renderApp = function renderApp() {
   var jsx = React.createElement(
     "div",
-    null,
+    { style: appStyles.app },
     React.createElement(
-      "h1",
-      null,
-      app.title
+      "div",
+      { style: appStyles.headerWrapper },
+      React.createElement(
+        "h1",
+        { style: appStyles.h1 },
+        app.title
+      ),
+      React.createElement(
+        "h2",
+        { style: appStyles.h2 },
+        app.subtitle
+      )
     ),
-    React.createElement(
-      "h2",
-      null,
-      app.subtitle
-    ),
-    React.createElement(
+    app.books.length === 0 && React.createElement(
       "p",
-      null,
-      "There are ",
-      app.books.length,
-      " books in the list so far."
+      { style: appStyles.counter },
+      "Currently there are no books in the list. Enter a few to get started!"
     ),
     React.createElement(
       "ul",
-      null,
+      { style: appStyles.booklist },
       app.books.map(function (book) {
         return React.createElement(
           "li",
-          { key: app.books.indexOf(book) },
+          { key: app.books.indexOf(book), style: appStyles.book },
           book
         );
       })
     ),
     React.createElement(
       "form",
-      { onSubmit: onFormSubmit },
+      { onSubmit: onFormSubmit, style: appStyles.form },
       React.createElement("input", { type: "text", name: "booktitle", placeholder: "Book title" }),
       React.createElement(
         "button",
