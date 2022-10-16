@@ -1,5 +1,3 @@
-"use strict";
-
 //React App Rendering process
 //   1. This is behind-the-scene process of how the React renders the app.
 //   2. The Data that changes due to event processing by default does not get
@@ -11,10 +9,10 @@
 //   6. It then re-renders the app using React DOM's render function.
 
 //Data that changes with every button click
-var clickCounter = 0;
+let clickCounter = 0;
 
 //Click handler that executes every time the button is clicked
-var clickHandler = function clickHandler() {
+const clickHandler = () => {
   //Increment the counter
   clickCounter++;
   //Because the data changed, render the app again
@@ -24,48 +22,28 @@ var clickHandler = function clickHandler() {
 //Our JSX template
 //Note: this template uses "clickCounter" data that changes
 //and the change must get reflected every time the data changes
-var jsxTemplate = React.createElement(
-  "div",
-  null,
-  React.createElement(
-    "h1",
-    null,
-    "Button is clicked ",
-    clickCounter,
-    " times."
-  ),
-  React.createElement(
-    "button",
-    { onClick: clickHandler },
-    "Click me!!"
-  )
+let jsxTemplate = (
+  <div>
+    <h1>Button is clicked {clickCounter} times.</h1>
+    <button onClick={clickHandler}>Click me!!</button>
+  </div>
 );
 
 //A new function that binds the data manually to the template
 //and renders the whole JSX template to the browser
-var renderApp = function renderApp() {
-  var jsxTemplate = React.createElement(
-    "div",
-    null,
-    React.createElement(
-      "h1",
-      null,
-      "Button is clicked ",
-      clickCounter,
-      " times."
-    ),
-    React.createElement(
-      "button",
-      { onClick: clickHandler },
-      "Click me!!"
-    )
+const renderApp = () => {
+  let jsxTemplate = (
+    <div>
+      <h1>Button is clicked {clickCounter} times.</h1>
+      <button onClick={clickHandler}>Click me!!</button>
+    </div>
   );
 
   appRoot.render(jsxTemplate); //JSX transpiled into React calls
 };
 
 //Get the app root where to render our DOM
-var appRoot = ReactDOM.createRoot(document.querySelector("#app"));
+const appRoot = ReactDOM.createRoot(document.querySelector("#app"));
 
 //Initial app rendering
 renderApp();
